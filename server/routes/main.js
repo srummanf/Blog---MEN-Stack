@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //Routes
-router.get('/about', (req, res) => {
+router.get('/home', (req, res) => {
     res.send('Hello World');
 });
 
