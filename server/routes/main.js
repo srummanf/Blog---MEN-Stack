@@ -8,9 +8,9 @@ router.get('', (req, res) => {
         description: "Simple blog using MEN",
     }
 
-
     res.render('index', {locals});
 });
+
 router.get('/about', (req, res) => {
     res.render('about');
 });
