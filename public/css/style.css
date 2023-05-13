@@ -183,7 +183,7 @@ img {
     font-weight: 400;
 }
 
-.article-ul {
+.article_ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -192,7 +192,7 @@ img {
     flex-direction: column;
 }
 
-.article-list_date {
+.article_list_date {
     font-size: 1rem;
     color: var(--gray);
     width: 100px;
@@ -200,7 +200,7 @@ img {
     width: 260px;
 }
 
-.article-ul li a {
+.article_ul li a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -208,25 +208,25 @@ img {
     margin: 18px 0;
 }
 
-.article-ul li {
+.article_ul li {
     font-size: 24px;
     cursor: pointer;
     transition: filter 0.1s;
 }
 
-.article-ul li:not(:last-child) {
+.article_ul li:not(:last-child) {
     border-bottom: 1px solid var(--gray-light);
 }
 
-.article-ul li:hover {
+.article_ul li:hover {
     filter: none;
 }
 
-.article-ul:hover li {
+.article_ul:hover li {
     filter: blur(3px);
 }
 
-.article-ul:hover li:hover {
+.article_ul:hover li:hover {
     filter: none;
 }
 
@@ -242,22 +242,22 @@ img {
 
 
 /* Dashboard Admin */
-.admin-title {
+.admin_title {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.admin-posts {
+.admin_posts {
     padding: 0;
     margin: 0;
 }
 
-.admin-post-controls form {
+.admin_post-controls form {
     display: inline-block;
 }
 
-.admin-post-controls .btn {
+.admin_post-controls .btn {
     display: inline-block;
     background-color: var(--black);
     color: var(--gray-light);
@@ -268,7 +268,7 @@ img {
     line-height: 2;
 }
 
-.admin-posts li {
+.admin_posts li {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
@@ -325,12 +325,12 @@ img {
 }
 
 @media only screen and (min-width: 768px) {
-    .article-ul li a {
+    .article_ul li a {
         flex-direction: row;
         align-items: center;
     }
 
-    .article-list_date {
+    .article_list_date {
         text-align: right;
     }
 }
