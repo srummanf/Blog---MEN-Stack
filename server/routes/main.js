@@ -7,6 +7,8 @@ const Post = require('../models/Post');
  *  GET /
  * HOME
  */
+
+
 // router.get('', async (req, res) => {
 //     const locals = {
 //         title: "NodeJs Blog",
@@ -30,12 +32,9 @@ router.get('', async (req, res) => {
             title: "NodeJs Blog",
             description: "Simple blog using MEN",
         }
-
         let perPage = 6;
         let page = req.query.page || 1;
-
         const data = await Post.aggregate([{ $sort: { createdAt: -1 } }]).skip(perPage * page - perPage).limit(perPage).exec();
-
         const count = await Post.count();
         const nextPage = parseInt(page) + 1;
         const hasNextPage = nextPage <= Math.ceil(count / perPage);
@@ -44,17 +43,7 @@ router.get('', async (req, res) => {
     catch (err) {
         console.log(err)
     }
-
-
-
 });
-
-// 
-
-
-
-
-
 
 
 
@@ -79,6 +68,8 @@ router.get('/about', (req, res) => {
 
 module.exports = router;
 
+
+// These are some dummy datas
 
 // function insertPostData() {
 //     Post.insertMany([

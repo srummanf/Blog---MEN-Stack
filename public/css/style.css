@@ -13,7 +13,8 @@
     --border-radius: 0.625rem;
 }
 
-
+/* What is clamp */
+/* clamp() is a CSS function that takes three values and returns the middle value within a range of values between a defined minimum and maximum bound. */
 
 /* We have applied the simple CSS reset. We have used all the text font to be used as Open Sans and color to be black with font size of 1 rem. A background image of noise is also applied */
 body {
@@ -32,17 +33,19 @@ body {
 
 /* Layout */
 
-/* container contains our entire website and we have added th */
+/* container contains our entire website. */
 .container {
     max-width: 58rem;
     margin: 0 auto;
     padding: 0 10px;
 }
 
+/* container where our route will be rendered. Basic padding added */
 .main {
     padding: 20px 0;
 }
 
+/* The input container styling */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -58,6 +61,7 @@ textarea {
     margin-bottom: 1rem;
 }
 
+/* Button styling */
 .btn {
     background-color: var(--black);
     border: none;
@@ -73,12 +77,13 @@ textarea {
     background-color: var(--red);
 }
 
+/* Header image styling */
 img {
     width: 100%;
     height: auto;
 }
 
-/* Hero Section */
+/* Hero Section styling */
 .hero-image {
     max-height: 33rem;
     filter: drop-shadow(0px 44px 34px rgba(0, 0, 0, 0.25));
@@ -86,7 +91,7 @@ img {
     border-radius: var(--border-radius);
 }
 
-/* Main Header */
+/* Main Header styling */
 .header {
     display: grid;
     align-items: center;
@@ -145,7 +150,7 @@ img {
     border: 2px solid var(--black);
 }
 
-/* Header -> Navigation */
+/* Header -> Navigation styling */
 .header_nav ul {
     list-style-type: none;
     display: flex;
@@ -167,7 +172,7 @@ img {
     text-decoration: underline;
 }
 
-/* Author - HomePage */
+/* Author - HomePage styling */
 .author {
     padding: 10px 0;
     text-align: center;
@@ -184,7 +189,7 @@ img {
 }
 
 
-/* Home Article List */
+/* Home Article List styling */
 .articles_heading {
     margin-top: 4rem;
     font-weight: 400;
@@ -241,14 +246,14 @@ img {
     white-space: pre-wrap;
 }
 
-/* Footer */
+/* Footer  styling*/
 .footer {
     margin: 4rem;
     text-align: center;
 }
 
 
-/* Dashboard Admin */
+/* Dashboard Admin styling */
 .admin_title {
     display: flex;
     justify-content: space-between;
@@ -281,7 +286,7 @@ img {
     padding: 10px 0;
 }
 
-/* SeachBar */
+/* Search Bar styling */
 .searchBar {
     visibility: hidden;
     transform: translateY(-100px);
@@ -311,6 +316,12 @@ img {
     padding: 15px;
 }
 
+/* What is pagination */
+/* Pagination is the process of dividing a large amount of content into smaller,
+more manageable pages. This is often used on websites and other digital platforms to make it easier for users to find the information they are looking for. */
+/* In our project "View older posts" is pagination element */
+
+/* Pagination styling */
 .pagination {
     font-size: 1.3rem;
     color: var(--gray);
@@ -322,6 +333,9 @@ img {
 .pagination:hover {
     color: var(--black);
 }
+
+
+/* Media Queries */
 
 @media only screen and (min-width: 768px) {
     .header {
