@@ -69,7 +69,7 @@ router.get('/about', (req, res) => {
 module.exports = router;
 
 
-// These are some dummy datas
+//These are some dummy datas
 
 // function insertPostData() {
 //     Post.insertMany([
