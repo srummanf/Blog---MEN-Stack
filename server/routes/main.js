@@ -20,7 +20,7 @@ const Post = require('../models/Post');
 //         res.render('index', { locals, data });
 //     }
 //     catch (err) {
-//         console.log(error)
+//         console.log(err)
 //     }
 
 // });
@@ -32,7 +32,7 @@ router.get('', async (req, res) => {
             title: "NodeJs Blog",
             description: "Simple blog using MEN",
         }
-        let perPage = 6;
+        let perPage = 10;
         let page = req.query.page || 1;
         const data = await Post.aggregate([{ $sort: { createdAt: -1 } }]).skip(perPage * page - perPage).limit(perPage).exec();
         const count = await Post.count();
@@ -44,6 +44,56 @@ router.get('', async (req, res) => {
         console.log(err)
     }
 });
+
+// Get
+// post
+router.get('/post/:id', async (req, res) => {
+
+    try {
+        let slug = req.params.id;
+        const data = await Post.findById({ _id: slug });
+        const locals = {
+            title: data.title,
+            description: "Simple blog using MEN",
+        }
+        res.render('post', { locals, data });
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+});
+
+
+/**
+ * 
+ */
+
+router.post('/search', async (req, res) => {
+    const locals = {
+        title: "NodeJs Blog",
+        description: "Simple blog using MEN",
+    }
+
+    try {
+        let search = req.body.searchTerm;
+        const searchNoSpecialChar = search.replace(/[^a-zA-Z ]/g, "")
+        // res.send(search)
+        const data = await Post.find({
+            $or: [
+                { title: { $regex: new RegExp(searchNoSpecialChar, "i") } },
+                { body: { $regex: new RegExp(searchNoSpecialChar, "i") } }
+            ]
+        }); //Will find all the posts in the
+        res.render('search', { data });
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+});
+
+
 
 
 
@@ -66,10 +116,10 @@ router.get('/about', (req, res) => {
 
 
 
-module.exports = router;
 
 
-//These are some dummy datas
+
+// These are some dummy datas
 
 // function insertPostData() {
 //     Post.insertMany([
@@ -116,3 +166,5 @@ module.exports = router;
 //     ])
 // }
 // insertPostData();
+
+module.exports = router;

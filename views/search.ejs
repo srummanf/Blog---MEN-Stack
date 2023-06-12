@@ -1,15 +1,10 @@
-<!-- <h1>Home</h1> -->
 <div class="author">
-    <h1 class="author_heading">Hi, I am Rumi</h1>
-    <p class="author_body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga cumque earum optio!</p>
-
+    <h1 class="author_heading"> Search Results</h1>
 </div>
 
-<img src="/img/hero_image.webp" alt="Rumi" class="hero_image" width="981" height="528">
 <section class="articles">
-    <h2 class="articles_heading">Latest Post</h2>
     <ul class="article_ul">
-
+    
         <% data.forEach(post=> { %>
             <li>
                 <a href="/post/<%= post._id %>">
@@ -23,7 +18,4 @@
             </li>
             <% }) %>
     </ul>
-    <% if (nextPage !==null) { %>
-        <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
-        <% } %>
 </section>

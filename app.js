@@ -8,6 +8,9 @@ const connectDB = require('./server/config/db.js');
 const app =  express();
 const port = 5000 || process.env.PORT;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); //allpws to use form values
+
 // Connect to MongoDB
 connectDB();
 
