@@ -105,6 +105,12 @@ app.post(
   })
 );
 
+// Logout Route
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
 app.use("/", require("./server/routes/main"));
 app.use("/", require("./server/routes/admin"));
 
