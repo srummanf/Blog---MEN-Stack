@@ -117,6 +117,47 @@ router.post('/admin', async (req, res) => {
     }
 });
 
+/**
+ * PUT /
+ * User - Update Profile
+ */
+router.put('/update-profile', [
+    authMiddleware, // Authenticate the user
+    body('password')
+        .optional()
+        .isLength({ min: 6 }).withMessage('New password must be at least 6 characters')
+], async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const userId = req.userId;
+        const { password } = req.body;
+
+        try {
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            if (password) {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                user.password = hashedPassword;
+            }
+
+            await user.save();
+            res.status(200).json({ message: 'Profile updated successfully' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // Post request`
 router.post('/admin', async (req, res) => {
