@@ -81,35 +81,6 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// Registration Route
-app.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  try {
-    const newUser = new User({ name, email, passowrd: hashedPassword });
-    await newUser.save();
-    res.redirect("/login");
-  } catch (err) {
-    res.render("register", { error: "An error occured during registration" });
-  }
-});
-
-// Login Route
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/login",
-    failureFlash: true,
-  })
-);
-
-// Logout Route
-app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
 
 app.use("/", require("./server/routes/main"));
 app.use("/", require("./server/routes/admin"));
