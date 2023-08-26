@@ -4,6 +4,7 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { body, validationResult } = require('express-validator');
 
 const adminLayout = '../views/layouts/admin';
 const jwtSecret = process.env.JWT_SECRET;
@@ -13,22 +14,38 @@ const jwtSecret = process.env.JWT_SECRET;
  * POST /
  * Admin - Register
 */
-router.post('/register', async (req, res) => {
+router.post('/register', [
+    // Validate username
+    body('username')
+        .notEmpty().withMessage('Username is required')
+        .isLength({ min: 4 }).withMessage('Username must be at least 4 characters'),
+
+    // Validate password
+    body('password')
+        .notEmpty().withMessage('Password is required')
+        .isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
+], async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const { username, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
+
         try {
             const user = await User.create({ username, password: hashedPassword });
             res.status(201).json({ message: 'User Created', user });
         } catch (error) {
             if (error.code === 11000) {
-                res.status(409).json({ message: 'User already in use' });
+                return res.status(409).json({ message: 'User already in use' });
             }
-            res.status(500).json({ message: 'Internal server error' })
+            res.status(500).json({ message: 'Internal server error' });
         }
-
     } catch (error) {
         console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
@@ -100,6 +117,47 @@ router.post('/admin', async (req, res) => {
     }
 });
 
+/**
+ * PUT /
+ * User - Update Profile
+ */
+router.put('/update-profile', [
+    authMiddleware, // Authenticate the user
+    body('password')
+        .optional()
+        .isLength({ min: 6 }).withMessage('New password must be at least 6 characters')
+], async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const userId = req.userId;
+        const { password } = req.body;
+
+        try {
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            if (password) {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                user.password = hashedPassword;
+            }
+
+            await user.save();
+            res.status(200).json({ message: 'Profile updated successfully' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 // Post request`
 router.post('/admin', async (req, res) => {
