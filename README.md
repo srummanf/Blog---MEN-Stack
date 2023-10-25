@@ -1,2 +1,10 @@
-﻿# Blog---MEN-Stack
-In this project we will be revising the concepts of MongoDB, Node and Express by building a small blogging website
+﻿# Blog Website
+
+![1698214295013](image/README/1698214295013.png)
+
+### Tech Stack
+
+* EJS
+* NodeJS
+* Express
+* MongoDB

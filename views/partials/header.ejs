@@ -1,19 +1,22 @@
-<!-- <h1>Header</h1> -->
-<!-- header.ejs -->
 <header class="header">
-    <a href="/" class="header_logo">
-        NodeJS
-    </a>
-    <nav class="header_nav">
+    <a href="/" class="header__logo">NodeJs</a>
+
+    <nav class="header__nav">
         <ul>
             <li>
-                <a href="/" class="">Home</a>
-                <a href="/about" class="">About</a>
-                <a href="/contact" class="">Contact</a>
+                <a href="/" class="<%= isActiveRoute('/', currentRoute) %>">Home</a>
+            </li>
+            <li>
+                <a href="/about" class="<%= isActiveRoute('/about', currentRoute) %>">About</a>
+            </li>
+            <li>
+                <a href="/contact" class="<%= isActiveRoute('/contact', currentRoute) %>">Contact</a>
             </li>
         </ul>
+
     </nav>
-    <div class="header_button">
+
+    <div class="header__button">
         <button class="searchBtn" aria-expanded="false">
             Search
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,4 +28,5 @@
             </svg>
         </button>
     </div>
+
 </header>
